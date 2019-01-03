@@ -5,9 +5,8 @@ project('benchmark', 'cpp',
 
 benchmark_sources = [
  'src/benchmark.cc',
- 'src/benchmark_api_internal.cc',
+ 'src/benchmark_main.cc',
  'src/benchmark_register.cc',
- 'src/benchmark_runner.cc',
  'src/colorprint.cc',
  'src/commandlineflags.cc',
  'src/complexity.cc',
@@ -21,7 +20,8 @@ benchmark_sources = [
  'src/string_util.cc',
  'src/sysinfo.cc',
  'src/timers.cc'
- ]
+]
+
 
 benchmark_main_sources = ['src/benchmark_main.cc']
 inc = include_directories('include')
@@ -36,8 +36,7 @@ lib_benchmark = library('gbenchmark',
 
 google_benchmark_dep = declare_dependency(
                         link_with:lib_benchmark,
-                        include_directories:inc
-                        )
+                        include_directories:inc)
 
 lib_benchmark_main = library('benchmark-main',
                         benchmark_main_sources,
@@ -47,5 +46,4 @@ lib_benchmark_main = library('benchmark-main',
 
 google_benchmark_main_dep = declare_dependency(
                         link_with:lib_benchmark_main,
-                        include_directories:inc
-                        )
+                        include_directories:inc)
