@@ -30,22 +30,20 @@ inc = include_directories('include')
 
 thread_dep = dependency('threads')
 
-lib_benchmark = library('gbenchmark',
+lib_benchmark = library('benchmark',
                         benchmark_sources,
-                        include_directories:inc,
+                        include_directories : inc,
                         cpp_args : '-DNDEBUG',
                         dependencies : thread_dep)
 
-google_benchmark_dep = declare_dependency(
-                        link_with:lib_benchmark,
-                        include_directories:inc)
+google_benchmark_dep = declare_dependency(link_with : lib_benchmark,
+                                          include_directories : inc)
 
 lib_benchmark_main = library('benchmark-main',
-                        benchmark_main_sources,
-                        include_directories:inc,
-                        cpp_args : '-DNDEBUG',
-                        dependencies : google_benchmark_dep)
+                             benchmark_main_sources,
+                             include_directories : inc,
+                             cpp_args : '-DNDEBUG',
+                             dependencies : google_benchmark_dep)
 
-google_benchmark_main_dep = declare_dependency(
-                        link_with:lib_benchmark_main,
-                        include_directories:inc)
+google_benchmark_main_dep = declare_dependency(link_with:lib_benchmark_main,
+                                               dependencies:google_benchmark_dep)
